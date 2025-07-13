@@ -1,2 +1,8 @@
 # alx-fe-reactjs
-This project aims to provide a solid foundation in React by guiding you through the creation and modification of basic React applications and components. By engaging with this project, you will gain practical experience in setting up React applications, understanding JSX, and working with components and props.
+
+A React learning project for building and modifying basic React applications and components.
+
+## What you'll learn
+- Setting up React applications
+- Understanding JSX
+- Working with components and props
