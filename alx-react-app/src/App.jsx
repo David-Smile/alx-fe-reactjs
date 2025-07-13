@@ -1,5 +1,5 @@
 import './App.css'
-import WelcomeMessage from './WelcomeMessage.jsx'
+import WelcomeMessage from './components/WelcomeMessage.jsx'
 function App() {
   return (
     <WelcomeMessage />
