@@ -3,7 +3,7 @@ import UserProfile from './components/UserProfile.jsx'
 function App() {
   return (
     <div>
-      <UserProfile name="John" age={25} bio="I am a software engineer" />
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
     </div>
   )
 }
