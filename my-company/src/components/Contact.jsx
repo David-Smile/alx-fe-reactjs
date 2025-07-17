@@ -17,16 +17,16 @@ function Contact() {
   };
 
   return (
-    <div style={{ padding: '40px 5vw', background: 'linear-gradient(90deg, #e0e7ff 60%, #f0f8ff 100%)', borderRadius: '16px', margin: '32px auto', maxWidth: '700px', minWidth: '0', boxShadow: '0 2px 12px rgba(30,144,255,0.07)', textAlign: 'center', width: '100%' }}>
-      <h1 style={{ fontSize: '2.2rem', color: '#1e90ff', marginBottom: '16px', fontWeight: 700, letterSpacing: '1px' }}>Contact Us</h1>
-      <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ padding: '20px' }}>
+      <h1>Contact Us</h1>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
           placeholder="Your Name"
           value={formData.name}
           onChange={handleChange}
-          style={{ padding: '10px', borderRadius: '6px', border: '1px solid #b0c4de', fontSize: '1rem' }}
+          style={{ display: 'block', margin: '10px 0' }}
         />
         <input
           type="email"
@@ -34,16 +34,16 @@ function Contact() {
           placeholder="Your Email"
           value={formData.email}
           onChange={handleChange}
-          style={{ padding: '10px', borderRadius: '6px', border: '1px solid #b0c4de', fontSize: '1rem' }}
+          style={{ display: 'block', margin: '10px 0' }}
         />
         <textarea
           name="message"
           placeholder="Your Message"
           value={formData.message}
           onChange={handleChange}
-          style={{ padding: '10px', borderRadius: '6px', border: '1px solid #b0c4de', fontSize: '1rem', minHeight: '80px' }}
+          style={{ display: 'block', margin: '10px 0' }}
         />
-        <button type="submit" style={{ padding: '12px', borderRadius: '6px', border: 'none', background: '#1e90ff', color: '#fff', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', transition: 'background 0.2s' }}>Send Message</button>
+        <button type="submit">Send Message</button>
       </form>
     </div>
   );
