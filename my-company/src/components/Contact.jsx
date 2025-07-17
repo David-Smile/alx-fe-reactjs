@@ -17,7 +17,7 @@ function Contact() {
   };
 
   return (
-    <div style={{ padding: '40px 20px', background: 'linear-gradient(90deg, #e0e7ff 60%, #f0f8ff 100%)', borderRadius: '16px', margin: '32px auto', maxWidth: '700px', boxShadow: '0 2px 12px rgba(30,144,255,0.07)', textAlign: 'center' }}>
+    <div style={{ padding: '40px 5vw', background: 'linear-gradient(90deg, #e0e7ff 60%, #f0f8ff 100%)', borderRadius: '16px', margin: '32px auto', maxWidth: '700px', minWidth: '0', boxShadow: '0 2px 12px rgba(30,144,255,0.07)', textAlign: 'center', width: '100%' }}>
       <h1 style={{ fontSize: '2.2rem', color: '#1e90ff', marginBottom: '16px', fontWeight: 700, letterSpacing: '1px' }}>Contact Us</h1>
       <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <input
