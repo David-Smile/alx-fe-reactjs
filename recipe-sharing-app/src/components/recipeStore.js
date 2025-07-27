@@ -67,4 +67,29 @@ export const useRecipeStore = create((set) => ({
       );
       return { recommendations: recommended };
     }),
+
+    updateRecipe: (updatedRecipe) =>
+      set((state) => {
+        const recipes = state.recipes.map((recipe) =>
+          recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+        );
+        return {
+          recipes,
+          filteredRecipes: recipes.filter((r) =>
+            r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+          ),
+        };
+      }),
+    
+    deleteRecipe: (recipeId) =>
+      set((state) => {
+        const recipes = state.recipes.filter((recipe) => recipe.id !== recipeId);
+        return {
+          recipes,
+          filteredRecipes: recipes.filter((r) =>
+            r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+          ),
+          favorites: state.favorites.filter((id) => id !== recipeId),
+        };
+      }),
 }));

@@ -10,6 +10,9 @@ const App = () => {
         <Route path="/" element={<RecipeList />} />
         <Route path="/add" element={<AddRecipeForm />} />
         <Route path="/recipes/:id" element={<RecipeDetail />} />
+        <RecipeDetails />
+        <EditRecipeForm />
+        <DeleteRecipeButton />
       </Routes>
     </div>
   );
