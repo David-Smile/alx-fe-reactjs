@@ -9,6 +9,7 @@ export const useRecipeStore = create((set) => ({
 
   // Actions
   setRecipes: (recipes) => set({ recipes }),
+
   setSearchTerm: (term) =>
     set((state) => {
       const filtered = state.recipes.filter((r) =>
@@ -22,6 +23,31 @@ export const useRecipeStore = create((set) => ({
       recipes: [...state.recipes, newRecipe],
       filteredRecipes: [...state.filteredRecipes, newRecipe],
     })),
+
+  updateRecipe: (updatedRecipe) =>
+    set((state) => {
+      const updatedRecipes = state.recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      );
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: updatedRecipes.filter((r) =>
+          r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+        ),
+      };
+    }),
+
+  deleteRecipe: (recipeId) =>
+    set((state) => {
+      const updatedRecipes = state.recipes.filter((r) => r.id !== recipeId);
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: updatedRecipes.filter((r) =>
+          r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+        ),
+        favorites: state.favorites.filter((id) => id !== recipeId),
+      };
+    }),
 
   addFavorite: (recipeId) =>
     set((state) => ({
