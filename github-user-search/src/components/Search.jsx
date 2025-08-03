@@ -15,9 +15,9 @@ const Search = () => {
 
     try {
       const userData = await fetchUserData(username);
-      setUser(userData);
+      setUser(userData); // includes avatar_url, login
     } catch (err) {
-      setError('Looks like we can’t find the user');
+      setError('Looks like we cant find the user');
     } finally {
       setLoading(false);
     }
@@ -40,7 +40,7 @@ const Search = () => {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>Looks like we cant find the user</p>}
 
       {user && (
         <div style={{
@@ -50,13 +50,18 @@ const Search = () => {
           maxWidth: '400px',
           margin: '0 auto'
         }}>
+          {/* ✅ Avatar */}
           <img
             src={user.avatar_url}
             alt={user.login}
             width="100"
             style={{ borderRadius: '50%' }}
           />
-          <h3>{user.name || user.login}</h3>
+
+          {/* ✅ Login name */}
+          <h3>{user.login}</h3>
+
+          {/* ✅ GitHub profile link */}
           <p>
             <a href={user.html_url} target="_blank" rel="noopener noreferrer">
               View GitHub Profile
