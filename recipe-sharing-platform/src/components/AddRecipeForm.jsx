@@ -3,14 +3,14 @@ import { useState } from "react";
 const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
+  const [steps, setSteps] = useState(""); // renamed from instructions
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validation
-    if (!title || !ingredients || !instructions) {
+    if (!title || !ingredients || !steps) {
       setError("⚠️ Please fill in all fields before submitting.");
       return;
     }
@@ -25,10 +25,10 @@ const AddRecipeForm = () => {
     const newRecipe = {
       id: Date.now(),
       title,
-      description: instructions.substring(0, 60) + "...",
+      description: steps.substring(0, 60) + "...",
       image: "https://source.unsplash.com/400x300/?food",
       ingredients: ingredientsList,
-      instructions: instructions.split("\n").filter((step) => step.trim() !== ""),
+      steps: steps.split("\n").filter((step) => step.trim() !== ""), // now stored as steps
     };
 
     console.log("✅ New Recipe Added:", newRecipe);
@@ -36,7 +36,7 @@ const AddRecipeForm = () => {
     // Reset form
     setTitle("");
     setIngredients("");
-    setInstructions("");
+    setSteps("");
     setError("");
     alert("🎉 Recipe submitted successfully!");
   };
@@ -79,14 +79,14 @@ const AddRecipeForm = () => {
             ></textarea>
           </div>
 
-          {/* Instructions */}
+          {/* Steps */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               Preparation Steps (one per line)
             </label>
             <textarea
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
+              value={steps}
+              onChange={(e) => setSteps(e.target.value)}
               rows="6"
               className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
               placeholder="e.g.\nMix ingredients\nBake at 180°C for 20 minutes"
