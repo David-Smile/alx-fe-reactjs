@@ -1,11 +1,42 @@
-function HomePage() {
-    return (
-      <div className=" hover:shadow-xl sm:p-4 md:p-8 bg-gray-100 p-8 sm:max-w-xs md:max-w-sm mx-auto, my-20 rounded-lg shadow-lg user-profile">
-        <img className="hover:scale-110 transition-transform duration-300 ease-in-out rounded-full sm:w-24 sm:h-24 md:w-36 md:h-36 mx-auto outline-2 outline-offset-2 outline-blue-800 user-image"src="https://via.placeholder.com/150" alt="User" />
-        <h1 className="sm:text-lg md:text-xl text-blue-800 hover:text-blue-500 my-4 user-name">John Doe</h1>
-        <p className="text-gray-600 sm:text-sm md:text-base user-descritpion">Developer at Example Co. Loves to write code and explore new technologies.</p>
+import { useState, useEffect } from "react";
+
+const HomePage = () => {
+  const [recipes, setRecipes] = useState([]);
+
+  // Load recipes from data.json
+  useEffect(() => {
+    fetch("/src/data.json")
+      .then((res) => res.json())
+      .then((data) => setRecipes(data))
+      .catch((err) => console.error("Error loading recipes:", err));
+  }, []);
+
+  return (
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-3xl font-bold text-center mb-6 text-blue-700">
+        Recipe Sharing Platform 🍲
+      </h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {recipes.map((recipe) => (
+          <div
+            key={recipe.id}
+            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+          >
+            <img
+              src={recipe.image}
+              alt={recipe.title}
+              className="w-full h-40 object-cover"
+            />
+            <div className="p-4">
+              <h2 className="text-xl font-semibold text-gray-800">{recipe.title}</h2>
+              <p className="text-gray-600 text-sm mt-2">{recipe.description}</p>
+            </div>
+          </div>
+        ))}
       </div>
-    );
-  }
-  
-  export default HomePage;
+    </div>
+  );
+};
+
+export default HomePage;
