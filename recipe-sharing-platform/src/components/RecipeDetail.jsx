@@ -1,67 +1,59 @@
-import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import data from "../data.json";
 
 const RecipeDetail = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    fetch("/src/data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const foundRecipe = data.find((r) => r.id === parseInt(id));
-        setRecipe(foundRecipe);
-      })
-      .catch((err) => console.error("Error loading recipe details:", err));
+    // find recipe by ID
+    const foundRecipe = data.find((r) => r.id === parseInt(id));
+    setRecipe(foundRecipe);
   }, [id]);
 
   if (!recipe) {
-    return (
-      <div className="p-6 text-center text-red-600">
-        <p>Loading recipe...</p>
-      </div>
-    );
+    return <p className="text-center text-gray-600 mt-10">Recipe not found</p>;
   }
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="p-6 bg-gray-50 min-h-screen flex justify-center">
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-3xl w-full">
+        {/* Title */}
+        <h1 className="text-4xl font-bold text-blue-700 mb-4">
+          {recipe.title}
+        </h1>
+
+        {/* Image */}
         <img
           src={recipe.image}
           alt={recipe.title}
-          className="w-full h-60 object-cover"
+          className="w-full h-64 object-cover rounded-lg mb-6"
         />
-        <div className="p-6">
-          <h1 className="text-3xl font-bold text-blue-700 mb-4">
-            {recipe.title}
-          </h1>
-          <p className="text-gray-700 mb-4">{recipe.description}</p>
 
-          <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">
-            Ingredients
-          </h2>
-          <ul className="list-disc list-inside text-gray-600">
-            {recipe.ingredients?.map((ingredient, index) => (
-              <li key={index}>{ingredient}</li>
-            ))}
-          </ul>
+        {/* Ingredients */}
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+          🥗 Ingredients
+        </h2>
+        <ul className="list-disc list-inside mb-6 space-y-1">
+          {recipe.ingredients.map((ingredient, index) => (
+            <li key={index} className="text-gray-700">
+              {ingredient}
+            </li>
+          ))}
+        </ul>
 
-          <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">
-            Instructions
-          </h2>
-          <ol className="list-decimal list-inside text-gray-600 space-y-2">
-            {recipe.instructions?.map((step, index) => (
-              <li key={index}>{step}</li>
-            ))}
-          </ol>
-
-          <Link
-            to="/"
-            className="inline-block mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            ← Back to Home
-          </Link>
-        </div>
+        {/* Steps */}
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+          👩‍🍳 Preparation Steps
+        </h2>
+        <ol className="list-decimal list-inside space-y-2">
+          {recipe.steps.map((step, index) => (
+            <li key={index} className="text-gray-700">
+              {step}
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );
