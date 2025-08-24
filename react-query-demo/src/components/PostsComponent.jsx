@@ -13,11 +13,14 @@ const fetchPosts = async () => {
 function PostsComponent() {
   const [showPosts, setShowPosts] = useState(true);
 
-  // Use React Query to fetch posts
+  // Use React Query to fetch posts with advanced configuration
   const { data, error, isLoading, isError, refetch } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
     staleTime: 5000, // Data becomes stale after 5 seconds
+    cacheTime: 60000, // Cache data for 1 minute (60000ms)
+    refetchOnWindowFocus: true, // Refetch data when window gains focus
+    keepPreviousData: true, // Keep previous data while fetching new data
   });
 
   if (isLoading) {
