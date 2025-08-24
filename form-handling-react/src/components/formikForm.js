@@ -1,25 +1,18 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const initialValues = {
     name: '',
     email: '',
 };
 
-const validate = values => {
-    const errors = {};
-    if (!values.name) {
-        errors.name = 'Required';
-    }
-    if (!values.email) {
-        errors.email = 'Required';
-    } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-    ) {
-        errors.email = 'Invalid email address';
-    }
-    return errors;
-};
+const validationSchema = Yup.object({
+    name: Yup.string().required('Required'),
+    email: Yup.string()
+        .email('Invalid email address')
+        .required('Required'),
+});
 
 const onSubmit = (values, { setSubmitting, resetForm }) => {
     alert(JSON.stringify(values, null, 2));
@@ -31,7 +24,7 @@ function FormikForm() {
     return (
         <Formik
             initialValues={initialValues}
-            validate={validate}
+            validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
             {({ isSubmitting }) => (
