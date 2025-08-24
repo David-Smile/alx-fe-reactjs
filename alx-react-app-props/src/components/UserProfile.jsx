@@ -3,13 +3,13 @@ import UserContext from './UserContext';
 
 const UserProfile = () => {
   const user = useContext(UserContext);
-  return (
-    <div>
+        return (
+          <div>
       <h2>{user.name}</h2>
       <p>Age: {user.age}</p>
       <p>Bio: {user.bio}</p>
-    </div>
-  );
-};
+          </div>
+        );
+      };
 
 export default UserProfile;
