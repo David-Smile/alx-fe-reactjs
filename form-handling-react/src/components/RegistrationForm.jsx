@@ -4,11 +4,27 @@ function RegistrationForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = {};
+
+    if (!username) newErrors.username = 'Username is required';
+    if (!email) newErrors.email = 'Email is required';
+    if (!password) newErrors.password = 'Password is required';
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      // Submit form logic here
+    }
+  };
 
   return (
     <div>
       <h2>Registration Form</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
           <input
@@ -19,17 +35,16 @@ function RegistrationForm() {
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
+          {errors.username && <span style={{color: 'red'}}>{errors.username}</span>}
         </div>
         <div>
           <label htmlFor="email">Email:</label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            required
+            type="email" id="email" name="email" required
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
+          {errors.email && <span style={{color: 'red'}}>{errors.email}</span>}
         </div>
         <div>
           <label htmlFor="password">Password:</label>
@@ -41,6 +56,7 @@ function RegistrationForm() {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+          {errors.password && <span style={{color: 'red'}}>{errors.password}</span>}
         </div>
         <button type="submit">Register</button>
       </form>
