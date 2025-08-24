@@ -23,7 +23,7 @@ function App() {
               <Route path="/login" element={<Login />} />
 
               {/* Dynamic Routing - Blog Posts */}
-              <Route path="/blog/:postId" element={<BlogPost />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
 
               {/* Protected Routes with Nested Routing */}
               <Route
